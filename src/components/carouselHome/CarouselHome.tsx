@@ -68,6 +68,9 @@ function CarouselHome() {
 const ContainerCarousel = styled.div`
   height: 500px;
   width: 100%;
+  @media (max-width: 560px) {
+    height: 250px;
+  }
 `;
 const ContainerImg = styled.img`
   height: 100%;
