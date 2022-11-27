@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Select, Pagination } from "antd";
+import productApi from "@/services/productApi";
 import ListProduct from "@components/listProduct/ListProduct";
 
 function Product() {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+  const [page, setPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const [listProduct, setListProduct] = useState<any>();
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data, total_pages }: any = await productApi.getListProduct(
+          page
+        );
+        setTotalPage(total_pages);
+        setListProduct(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, [page]);
   return (
     <>
       <MainProduct>
@@ -50,7 +68,7 @@ function Product() {
           </SelectText>
         </FilterProduct>
       </MainProduct>
-      <ListProduct />
+      <ListProduct data={listProduct} />
       <Pagination
         defaultCurrent={1}
         total={50}

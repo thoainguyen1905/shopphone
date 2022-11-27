@@ -121,7 +121,7 @@ const TitleBody = styled.div`
   margin-bottom: 5px;
 `;
 
-const LineHeight = styled.div`
+export const LineHeight = styled.div`
   height: 4px;
   width: 30px;
   margin-top: 5px;

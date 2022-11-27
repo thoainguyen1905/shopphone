@@ -10,6 +10,9 @@ const Register = React.lazy(() => import("../screen/register/Register"));
 const Introduce = React.lazy(() => import("../screen/introduce/Introduce"));
 const Contact = React.lazy(() => import("../screen/contact/Contact"));
 const Product = React.lazy(() => import("../screen/product/Product"));
+const ProductDetail = React.lazy(
+  () => import("../screen/product/productDetail/ProductDetail")
+);
 
 function Main() {
   return (
@@ -24,6 +27,7 @@ function Main() {
           <Route path="/news" element={<News />} />
           <Route path="/register" element={<Register />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
         <Footer />
       </Suspense>
