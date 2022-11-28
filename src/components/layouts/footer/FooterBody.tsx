@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+// import * as yup from "yup";
+import contactApi from "@services/contactApi";
+import { toasttifySuccess, toastifyError } from "@/utils/toastify";
 
 function FooterBody() {
   const {
@@ -8,7 +11,18 @@ function FooterBody() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      const output = { ...data, type: "CONTACT" };
+      const res = await contactApi.createContact(output);
+      if (res) {
+        toasttifySuccess("Gửi thông tin liên hệ thành công");
+      }
+    } catch (error) {
+      toastifyError(`${error}`);
+      console.log(error);
+    }
+  };
   return (
     <WrapperMain>
       <ItemFooter>
@@ -40,13 +54,16 @@ function FooterBody() {
             placeholder="Tên của bạn"
           />
           <input
-            id="name"
+            id="phone"
             {...register("phone", { required: true, maxLength: 30 })}
             placeholder="Số điện thoại*"
           />
           <input
-            id="name"
-            {...register("email", { required: true, maxLength: 30 })}
+            id="email"
+            {...register("email", {
+              required: true,
+              maxLength: 30,
+            })}
             placeholder="Email*"
           />
           {errors.name && errors.name.type === "required" && (
@@ -121,7 +138,7 @@ const TitleBody = styled.div`
   margin-bottom: 5px;
 `;
 
-const LineHeight = styled.div`
+export const LineHeight = styled.div`
   height: 4px;
   width: 30px;
   margin-top: 5px;

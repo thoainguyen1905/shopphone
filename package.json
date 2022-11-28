@@ -26,12 +26,12 @@
     "react-scripts": "5.0.1",
     "react-spinners": "^0.13.6",
     "react-toastify": "^9.1.1",
+    "react-zoom-slider": "^0.1.0",
     "sass": "^1.56.1",
     "styled-components": "^5.3.6",
     "swiper": "^8.4.4",
     "typescript": "^4.4.2",
-    "web-vitals": "^2.1.0",
-    "yup": "^0.32.11"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "craco start",
