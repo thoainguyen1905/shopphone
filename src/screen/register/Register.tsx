@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import useContact from "@hooks/useContact";
 import { useForm } from "react-hook-form";
 
 function Register() {
+  const { onCreateNewContact } = useContact();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    onCreateNewContact(data);
+    reset();
+  };
   return (
     <WrapperMain>
       <Title>ĐĂNG KÝ LÁI THỬ</Title>

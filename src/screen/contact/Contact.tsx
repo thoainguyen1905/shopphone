@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import useContact from "@hooks/useContact";
 
 function Contact() {
+  const { onCreateNewContact } = useContact();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    onCreateNewContact(data);
+    reset();
+  };
   return (
     <Main>
       <ContactForm>
@@ -24,7 +30,7 @@ function Contact() {
             placeholder="Tên của bạn*"
           />
           <input
-            id="name"
+            id="phone"
             {...register("phone", { required: true, maxLength: 30 })}
             placeholder="Số điện thoại*"
           />

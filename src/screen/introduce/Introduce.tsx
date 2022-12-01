@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import newsApi from "@services/newsApi";
 import { LineHeight } from "@components/layouts/footer/FooterBody";
 
 function Introduce() {
+  const params: any = useParams();
+  const [detail, setDetail] = useState<any>();
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await newsApi.getDetailNews(params.id);
+        setDetail(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, [params.id]);
+  console.log(detail);
+
   return (
     <WrapperMain>
       <ContentDes>

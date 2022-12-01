@@ -3,21 +3,27 @@ import styled from "styled-components";
 import { Tabs } from "antd";
 import { Rate } from "antd";
 import { useForm } from "react-hook-form";
+import useContact from "@hooks/useContact";
 
-function DescriptionProduct() {
+function DescriptionProduct({ detail }: any) {
+  const { onCreateNewContact } = useContact();
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm();
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    onCreateNewContact(data);
+    reset();
+  };
   return (
     <div>
       <Tabs defaultActiveKey="1">
         <Tabs.TabPane tab="Mô tả" key="1">
-          Viết mô tả sản phẩm vào đây
+          <p dangerouslySetInnerHTML={{ __html: detail }}></p>
         </Tabs.TabPane>
         <Tabs.TabPane tab="Đánh giá" key="2">
           <MainContainer>
@@ -36,7 +42,7 @@ function DescriptionProduct() {
               <textarea
                 id="name"
                 {...register("phone", { required: true, maxLength: 30 })}
-                placeholder="Số điện thoại*"
+                placeholder="Nhận xét của bạn*"
               />
               <input
                 id="name"

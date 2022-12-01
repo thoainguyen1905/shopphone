@@ -13,6 +13,7 @@ import DescriptionProduct from "@components/descriptionProduct/DescriptionProduc
 
 function ProductDetail() {
   const params: any = useParams();
+  const [detail, setDetail] = useState<any>();
   const [listImg, setListImg] = useState<any>();
   const openModal = useSelector(
     (state: AppState) => state.registerReducer.statusModal
@@ -21,14 +22,17 @@ function ProductDetail() {
   useEffect(() => {
     const getDetail = async () => {
       try {
-        const { imageUrl }: any = await productApi.getDetailProduct(params.id);
-        setListImg(imageUrl);
+        const res: any = await productApi.getDetailProduct(params.id);
+        setListImg(res.imageUrl);
+        setDetail(res);
       } catch (error) {
         console.log(error);
       }
     };
     getDetail();
   }, []);
+  console.log(detail);
+
   return (
     <MainContainer>
       <FlexItem>
@@ -42,7 +46,7 @@ function ProductDetail() {
               <a href="/">XE HUYNDAI </a>
             </Breadcrumb.Item>
           </Breadcrumb>
-          <TitleText>Hyundai HD 270</TitleText>
+          <TitleText>{detail?.name}</TitleText>
           <LineHeight></LineHeight>
           <TitleText
             style={{ color: "#0000FF", fontSize: "20px", textAlign: "center" }}
@@ -75,7 +79,7 @@ function ProductDetail() {
           <SocialIcon />
         </DetailRight>
       </FlexItem>
-      <DescriptionProduct />
+      <DescriptionProduct detail={detail?.description} />
     </MainContainer>
   );
 }

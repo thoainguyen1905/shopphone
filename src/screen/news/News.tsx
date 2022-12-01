@@ -1,76 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigation } from "@hooks/useNavigation";
+import newsApi from "@services/newsApi";
 
 function News() {
+  const [listNew, setListNew] = useState<any>();
+  const { navigate } = useNavigation();
+  const [page, setPage] = useState<number>(1);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res: any = await newsApi.getListNews(page);
+        setListNew(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+  console.log(listNew);
+
   return (
     <BoxMain>
       <ListNews>
-        <ContainerNews>
-          <EntryTitle>Tin tức và sự kiện</EntryTitle>
-          <TitleText>Giới Thiệu</TitleText>
-          <TimeDate>POSTED ON THÁNG HAI 7, 2020 BY ADMIN</TimeDate>
-          <FlexItem>
-            <ImgContainer
-              src="https://hyundaitaibus.vn/wp-content/uploads/2021/01/xe-tai-do-thanh-120sl-1024x768-1.jpg"
-              alt=""
-            />
-            <Des>
-              <p>
-                {" "}
-                Bài viết này sẽ giúp mọi người nhận biết, hiểu rõ và so sánh
-                được 2 dòng xe cùng phân khúc là Hyundai Mighty EX8 và Hyundai
-                HD120SL Đô Thành. Trước tiên, mời mọi người tham khảo rõ hơn về
-                Hyundai Mighty EX8 qua bài viết: Xe Tải EX8 Hyundai Mighty 8 Tấn
-                Thùng Dài […]
-              </p>
-              <BtnCon>continue reading </BtnCon>
-            </Des>
-          </FlexItem>
-        </ContainerNews>
-        <ContainerNews>
-          <EntryTitle>Tin tức và sự kiện</EntryTitle>
-          <TitleText>Giới Thiệu</TitleText>
-          <TimeDate>POSTED ON THÁNG HAI 7, 2020 BY ADMIN</TimeDate>
-          <FlexItem>
-            <ImgContainer
-              src="https://hyundaitaibus.vn/wp-content/uploads/2021/01/xe-tai-do-thanh-120sl-1024x768-1.jpg"
-              alt=""
-            />
-            <Des>
-              <p>
-                {" "}
-                Bài viết này sẽ giúp mọi người nhận biết, hiểu rõ và so sánh
-                được 2 dòng xe cùng phân khúc là Hyundai Mighty EX8 và Hyundai
-                HD120SL Đô Thành. Trước tiên, mời mọi người tham khảo rõ hơn về
-                Hyundai Mighty EX8 qua bài viết: Xe Tải EX8 Hyundai Mighty 8 Tấn
-                Thùng Dài […]
-              </p>
-              <BtnCon>continue reading </BtnCon>
-            </Des>
-          </FlexItem>
-        </ContainerNews>
-        <ContainerNews>
-          <EntryTitle>Tin tức và sự kiện</EntryTitle>
-          <TitleText>Giới Thiệu</TitleText>
-          <TimeDate>POSTED ON THÁNG HAI 7, 2020 BY ADMIN</TimeDate>
-          <FlexItem>
-            <ImgContainer
-              src="https://hyundaitaibus.vn/wp-content/uploads/2021/01/xe-tai-do-thanh-120sl-1024x768-1.jpg"
-              alt=""
-            />
-            <Des>
-              <p>
-                {" "}
-                Bài viết này sẽ giúp mọi người nhận biết, hiểu rõ và so sánh
-                được 2 dòng xe cùng phân khúc là Hyundai Mighty EX8 và Hyundai
-                HD120SL Đô Thành. Trước tiên, mời mọi người tham khảo rõ hơn về
-                Hyundai Mighty EX8 qua bài viết: Xe Tải EX8 Hyundai Mighty 8 Tấn
-                Thùng Dài […]
-              </p>
-              <BtnCon>continue reading </BtnCon>
-            </Des>
-          </FlexItem>
-        </ContainerNews>
+        {listNew?.map((item: any) => (
+          <ContainerNews key={item._id}>
+            <EntryTitle>Tin tức và sự kiện</EntryTitle>
+            <TitleText>{item.title}</TitleText>
+            <TimeDate>POSTED ON THÁNG HAI 7, 2020 BY ADMIN</TimeDate>
+            <FlexItem>
+              <ImgContainer src={item.imageUrl} alt="" />
+              <Des>
+                <p dangerouslySetInnerHTML={{ __html: item.content }}></p>
+                <BtnCon
+                  onClick={() => {
+                    navigate(`/news/${item._id}`);
+                  }}
+                >
+                  continue reading{" "}
+                </BtnCon>
+              </Des>
+            </FlexItem>
+          </ContainerNews>
+        ))}
       </ListNews>
       <SibarRight>
         <TitleText style={{ fontSize: "14px", textAlign: "start" }}>

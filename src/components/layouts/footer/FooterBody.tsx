@@ -10,6 +10,7 @@ function FooterBody() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = async (data: any) => {
     try {
