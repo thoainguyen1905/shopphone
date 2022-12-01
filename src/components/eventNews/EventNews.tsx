@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useNavigation } from "@hooks/useNavigation";
 import newsApi from "@services/newsApi";
 
 function EventNews() {
+  const { navigate } = useNavigation();
   const [listNews, setListNews] = useState<any>();
   useEffect(() => {
     const getData = async () => {
@@ -16,19 +18,19 @@ function EventNews() {
     };
     getData();
   }, []);
+
   return (
     <Box>
-      {listNews?.map(({ content, _id }: any) => (
-        <EventBox key={_id}>
-          <ImgEvent
-            src="https://hyundaitaibus.vn/wp-content/uploads/2020/02/post1-unnamed-7-300x225-1.jpg"
-            alt=""
-          />
-          <PostTitle>{content}</PostTitle>
-          <DesTitle>
-            Lời đầu tiên, Công ty Cổ phần Ô tô Thành Công Ninh Bình (Hyundai
-            Ninh [...]{" "}
-          </DesTitle>
+      {listNews?.map(({ content, _id, title, imageUrl }: any) => (
+        <EventBox
+          key={_id}
+          onClick={() => {
+            navigate(`/news/${_id}`);
+          }}
+        >
+          <ImgEvent src={imageUrl} alt="" />
+          <PostTitle>{title}</PostTitle>
+          <DesTitle dangerouslySetInnerHTML={{ __html: content }}></DesTitle>
         </EventBox>
       ))}
     </Box>
