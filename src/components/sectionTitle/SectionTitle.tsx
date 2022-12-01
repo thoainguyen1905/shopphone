@@ -39,7 +39,7 @@ const Item = styled.div`
   text-transform: uppercase;
   z-index: 5;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
   color: rgb(1, 82, 135);
   margin: auto;

@@ -9,7 +9,7 @@ function EventNews() {
       try {
         let page = 1;
         const res = await newsApi.getListNews(page);
-        setListNews(res);
+        setListNews(res.data);
       } catch (error) {
         console.log(error);
       }

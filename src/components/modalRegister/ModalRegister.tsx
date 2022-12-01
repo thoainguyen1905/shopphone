@@ -1,22 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+import contactApi from "@services/contactApi";
 import { AppState } from "@redux/store";
 import { setModalRegister } from "@redux/slice/registerSlice";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
+import { toastifyError, toasttifySuccess } from "@/utils/toastify";
 
 const ModalRegister: React.FC = () => {
   const openModal = useSelector(
     (state: AppState) => state.registerReducer.statusModal
   );
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const [phone, setPhone] = useState<number>();
   useEffect(() => {
     setTimeout(() => {
       dispatch(setModalRegister(true));
     }, 40000);
   }, [openModal]);
-
+  const onSubmit = async () => {
+    try {
+      await contactApi.createContact({
+        type: "CONTACT",
+        phone: phone,
+      });
+      toasttifySuccess("Gửi thông tin thành công");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    } catch (error) {
+      toastifyError("Đã có lỗi xảy ra");
+    }
+  };
   const handleCancel = () => {
     dispatch(setModalRegister(false));
   };
@@ -29,8 +45,13 @@ const ModalRegister: React.FC = () => {
           <span>Tin nhắn bảng giá sẽ gửi tới số điện thoại của bạn sau </span>2
           phút
         </TextTitle>
-        <InputText type="text" placeholder="Số điện thoại*" />
-        <ButtonSubmit>GỬI YÊU CẦU</ButtonSubmit>
+        <InputText
+          type="number"
+          pattern="[0-9]*"
+          placeholder="Số điện thoại*"
+          onChange={(e: any) => setPhone(e.target.value)}
+        />
+        <ButtonSubmit onClick={onSubmit}>GỬI YÊU CẦU</ButtonSubmit>
       </Modal>
     </>
   );
