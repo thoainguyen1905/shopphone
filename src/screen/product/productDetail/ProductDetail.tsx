@@ -31,7 +31,6 @@ function ProductDetail() {
     };
     getDetail();
   }, []);
-  console.log(detail);
 
   return (
     <MainContainer>

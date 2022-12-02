@@ -6,17 +6,19 @@ import ListProduct from "@components/listProduct/ListProduct";
 
 function Product() {
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+    setSort(value);
   };
   const [page, setPage] = useState<number>(1);
+  const [sort, setSort] = useState<string>("popular");
   const [totalPage, setTotalPage] = useState<number>(0);
   const [listProduct, setListProduct] = useState<any>();
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data, total_pages }: any = await productApi.getListProduct(
-          page
-        );
+        const { data, total_pages }: any = await productApi.getListProductSort({
+          page,
+          sort,
+        });
         setTotalPage(total_pages);
         setListProduct(data);
       } catch (error) {
@@ -24,7 +26,7 @@ function Product() {
       }
     };
     getData();
-  }, [page]);
+  }, [page, sort]);
   return (
     <>
       <MainProduct>
@@ -40,27 +42,23 @@ function Product() {
               onChange={handleChange}
               options={[
                 {
-                  value: "jack",
+                  value: "popular",
                   label: "Thứ tự theo mức độ phổ biến",
                 },
                 {
-                  value: "lucy",
-                  label: "Thứ tự mặc định",
-                },
-                {
-                  value: "disabled",
+                  value: "rating",
                   label: "Thứ tự theo điểm đánh giá",
                 },
                 {
-                  value: "Yiminghe",
+                  value: "lastest",
                   label: "Mới nhất",
                 },
                 {
-                  value: "Yiminghe",
+                  value: "priceAsc",
                   label: "Giá từ thấp đến cao",
                 },
                 {
-                  value: "Yiminghe",
+                  value: "priceDesc",
                   label: "Giá từ cao đến thấp",
                 },
               ]}
@@ -71,8 +69,11 @@ function Product() {
       <ListProduct data={listProduct} />
       <Pagination
         defaultCurrent={1}
-        total={50}
+        total={totalPage * 10}
         style={{ display: "flex", justifyContent: "center", margin: "20px" }}
+        onChange={(e) => {
+          setPage(e);
+        }}
       />
     </>
   );
