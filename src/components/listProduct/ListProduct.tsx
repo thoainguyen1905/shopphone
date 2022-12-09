@@ -8,6 +8,7 @@ interface PropsType {
 
 function ListProduct({ data }: PropsType) {
   const { navigate } = useNavigation();
+
   return (
     <Box>
       {data?.map((item: any) => (
@@ -17,7 +18,7 @@ function ListProduct({ data }: PropsType) {
             navigate(`/product/${item._id}`);
           }}
         >
-          <ImgCar src={`${item.imageUrl[0]}`} alt="" />
+          <ImgCar src={`${item.imageUrl[0]}`} hoverImage={true} alt="" />
           <TextCar>{item.name}</TextCar>
         </Item>
       ))}
@@ -38,7 +39,7 @@ const Box = styled.div`
   }
 `;
 
-const ImgCar = styled.img`
+const ImgCar: any = styled.img`
   height: 185px;
   width: 100%;
   object-fit: fill;

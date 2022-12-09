@@ -37,7 +37,7 @@ function Product() {
           <SelectText>
             <div className="mr-20">Hiển thị 1–15 của 18 kết quả</div>
             <Select
-              defaultValue="lucy"
+              defaultValue="popular"
               style={{ width: 230 }}
               onChange={handleChange}
               options={[

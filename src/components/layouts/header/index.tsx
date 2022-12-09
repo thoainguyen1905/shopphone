@@ -12,7 +12,6 @@ function Header() {
     const position = window.pageYOffset;
     setScrollPosition(position);
   };
-  console.log({ scrollPosition });
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
