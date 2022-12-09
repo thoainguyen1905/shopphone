@@ -32,30 +32,40 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.mr-20{
+.mr-20 {
   margin-right: 20px;
 }
-.mt-20{
+
+.mt-20 {
   margin-top: 20px;
 }
-.mt-30{
+
+.mt-30 {
   margin-top: 30px;
 }
-.mt-40{
+
+.mt-40 {
   margin-top: 40px;
 }
-.flex{
+
+.flex {
   display: flex;
 }
-.justiCenter{
+
+.justiCenter {
   justify-content: center;
 }
+
 .alignCenter {
   align-items: center;
 }
 
+.ant-modal-content {
+  border-radius: 20px !important;
+}

@@ -49,10 +49,18 @@ const TextCar = styled.div`
   margin: 0px 15px;
   margin-top: 10px;
   font-size: 15px;
+  font-weight: 500;
 `;
 
 const Item = styled.div`
   /* height: 260px; */
+  padding-bottom: 5px;
+  transition: opacity 0.3s, box-shadow 0.5s, transform 0.3s,
+    -webkit-box-shadow 0.5s, -webkit-transform 0.3s;
+  &:hover {
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 22%);
+    transform: translateY(-6px);
+  }
 `;
 
 export default ListProduct;

@@ -38,8 +38,15 @@ const ModalRegister: React.FC = () => {
   };
 
   return (
-    <>
-      <Modal open={openModal} onCancel={handleCancel} footer={null} width={600}>
+    <Main>
+      <Modal
+        open={openModal}
+        onCancel={handleCancel}
+        footer={null}
+        width={600}
+        bodyStyle={{ border: "3px solid #1e73be", borderRadius: "20px" }}
+        maskStyle={{ borderRadius: "10px" }}
+      >
         <TextTitle>Bảng Giá Ưu Đãi Hôm Nay</TextTitle>
         <TextTitle>
           <span>Tin nhắn bảng giá sẽ gửi tới số điện thoại của bạn sau </span>2
@@ -53,7 +60,7 @@ const ModalRegister: React.FC = () => {
         />
         <ButtonSubmit onClick={onSubmit}>GỬI YÊU CẦU</ButtonSubmit>
       </Modal>
-    </>
+    </Main>
   );
 };
 
@@ -64,6 +71,12 @@ const TextTitle = styled.div`
   text-align: center;
   span {
     color: black;
+  }
+`;
+
+const Main = styled.div`
+  .ant-modal-content {
+    border-radius: 10px !important;
   }
 `;
 

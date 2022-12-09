@@ -18,7 +18,6 @@ function Introduce() {
     };
     getData();
   }, [params.id]);
-  console.log(detail);
 
   return (
     <WrapperMain>

@@ -80,6 +80,7 @@ const NavText: any = styled.div`
   font-weight: 700;
   margin-right: 40px;
   font-size: 16px;
+  cursor: pointer;
   color: ${(props: any) =>
     props.data === props.location ? "white" : "rgba(255, 255, 255, 0.8)"};
   font-family: "Roboto";

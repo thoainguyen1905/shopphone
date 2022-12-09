@@ -38,12 +38,24 @@ function FooterBody() {
         </p>
       </ItemFooter>
       <ItemFooter>
-        <TitleBody>THÔNG TIN LIÊN HỆ</TitleBody>
+        <TitleBody>
+          <strong>THÔNG TIN LIÊN HỆ </strong>
+        </TitleBody>
         <LineHeight />
-        <TitleBody>NHÀ MÁY HYUNDAI THÀNH CÔNG NINH BÌNH</TitleBody>
-        <p>Địa chỉ: Lô C5, Khu Công Nghiệp Gián Khẩu, Gia Viễn, Ninh Bình</p>
-        <p>Hotline: 0919 735 883</p>
-        <p>Email: hyundaitaibus@gmail.com</p>
+        <TitleBody>
+          <strong>NHÀ MÁY HYUNDAI THÀNH CÔNG NINH BÌNH</strong>
+        </TitleBody>
+        <p>
+          <strong>
+            Địa chỉ: Lô C5, Khu Công Nghiệp Gián Khẩu, Gia Viễn, Ninh Bình
+          </strong>
+        </p>
+        <p>
+          <strong>Hotline: 0983 035 101</strong>
+        </p>
+        <p>
+          <strong>Email: nhamayxetaihyundai@gmail.com</strong>
+        </p>
       </ItemFooter>
       <ItemFooter>
         <TitleBody>LIÊN HỆ VỚI CHÚNG TÔI</TitleBody>
@@ -124,9 +136,11 @@ const ItemFooter = styled.div`
   width: 100%;
   text-align: justify;
   p {
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 10px;
+    strong {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
   }
   @media (max-width: 560px) {
     margin-bottom: 20px;
@@ -134,8 +148,11 @@ const ItemFooter = styled.div`
 `;
 
 const TitleBody = styled.div`
-  font-weight: 700;
-  font-size: 18px;
+  strong {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
   margin-bottom: 5px;
 `;
 

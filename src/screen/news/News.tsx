@@ -18,7 +18,6 @@ function News() {
     };
     getData();
   }, []);
-  console.log(listNew);
 
   return (
     <BoxMain>
