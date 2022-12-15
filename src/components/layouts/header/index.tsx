@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Styles from "./style.module.scss";
 import HeaderBody from "./headerBody";
 import HeaderTop from "./headerTop";
 import HeaderMob from "./headerMob";
@@ -20,10 +21,17 @@ function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  console.log(scrollPosition);
+
   return (
     <div>
       {isDesktop && (
-        <ScrollViewHeader valueScroll={scrollPosition}>
+        <ScrollViewHeader
+          valueScroll={scrollPosition}
+          className={
+            scrollPosition > 180 ? `${Styles.stuck}` : `${Styles.stumb}`
+          }
+        >
           <HeaderTop scrollPosition={scrollPosition} />
           <HeaderBody />
         </ScrollViewHeader>
@@ -35,26 +43,15 @@ function Header() {
 
 const ScrollViewHeader: any = styled.div`
   width: 100%;
-  height: auto;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  right: 0;
-  background-size: cover;
-  animation-duration: 0.6s;
-  animation-timing-function: ease;
-  animation-delay: 0s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-fill-mode: none;
-  animation-play-state: running;
-  animation-name: stuckMoveDown;
+  /* height: auto; */
+  position: relative;
+  z-index: 30;
   box-shadow: 1px 1px 10px rgb(0 0 0 / 15%);
-  -webkit-transition: background 0.5s ease-out;
-  -moz-transition: background 0.5s ease-out;
-  -o-transition: background 0.5s ease-out;
-  transition: background 0.5s ease-out;
-  position: ${(props: any) => (props.valueScroll > 200 ? "fixed" : "relative")};
+  transition-duration: 0.3s, 0.3s;
+  transition-timing-function: ease, ease;
+  transition-delay: 0s, 0s;
+  transition-property: background-color, opacity;
+  transition: background-color 0.3s, opacity 0.3s;
 `;
 
 export default Header;
