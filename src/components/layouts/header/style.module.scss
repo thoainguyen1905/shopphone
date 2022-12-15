@@ -9,14 +9,13 @@
   animation-play-state: running;
   animation-name: stuckMoveDown;
   top: 0;
-  position: fixed;
+  position: fixed !important;
   left: 0;
   right: 0;
   margin-top: 0px;
   margin-right: auto;
   margin-bottom: 0px;
   margin-left: auto;
-  transition: background-color 0.3s, opacity 0.3s;
 }
 
 @keyframes stuckMoveDown {

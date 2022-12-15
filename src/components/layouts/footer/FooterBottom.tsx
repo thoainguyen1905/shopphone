@@ -8,7 +8,7 @@ function FooterBottom() {
   return (
     <WrapperMain>
       <CopyText>
-        Copyright 2020 © <span>HYUNDAITAIBUS.VN</span>
+        Copyright 2020 © <span>xetaihyundaithanhcong.com</span>
       </CopyText>
       <IconList>
         <img src={Visa} alt="" />

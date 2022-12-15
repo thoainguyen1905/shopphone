@@ -29,7 +29,7 @@ function Header() {
         <ScrollViewHeader
           valueScroll={scrollPosition}
           className={
-            scrollPosition > 180 ? `${Styles.stuck}` : `${Styles.stumb}`
+            scrollPosition > 250 ? `${Styles.stuck}` : `${Styles.stumb}`
           }
         >
           <HeaderTop scrollPosition={scrollPosition} />
@@ -46,6 +46,9 @@ const ScrollViewHeader: any = styled.div`
   /* height: auto; */
   position: relative;
   z-index: 30;
+  background-size: cover;
+  background-position-x: 50%;
+  background-position-y: 0px;
   box-shadow: 1px 1px 10px rgb(0 0 0 / 15%);
   transition-duration: 0.3s, 0.3s;
   transition-timing-function: ease, ease;
